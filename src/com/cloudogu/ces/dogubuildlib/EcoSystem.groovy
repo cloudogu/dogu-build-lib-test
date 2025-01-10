@@ -515,7 +515,12 @@ Vagrant.configure(2) do |config|
   config.vm.synced_folder "ecosystem", "/vagrant", type: "rsync", rsync__exclude: [".git/", "images/"]
   config.vm.synced_folder ".", "${mountPath}"
   config.vm.provision "shell",
-    inline: "mkdir -p /etc/ces && echo 'gcloud-vagrant' > /etc/ces/type && /vagrant/install.sh"
+    inline: <<-SHELL
+      sudo apt-get update
+      sudo apt-get install -y jq
+      mkdir -p /etc/ces && echo 'gcloud-vagrant' > /etc/ces/type
+      /vagrant/install.sh
+    SHELL
 
 end
 """
