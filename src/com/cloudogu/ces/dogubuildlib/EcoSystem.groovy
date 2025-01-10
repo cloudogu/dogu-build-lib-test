@@ -486,6 +486,7 @@ project_id = data_hash["project_id"]
 Vagrant.configure(2) do |config|
 
   config.vm.box = "google/gce"
+  config.vm.box_url = "https://github.com/mitchellh/vagrant-google/raw/master/google.box"
 
   config.vm.provider :google do |google, override|
     google.google_project_id = project_id
